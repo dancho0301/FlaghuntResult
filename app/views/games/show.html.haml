@@ -1,6 +1,5 @@
 %p#notice= notice
 
+= render 'form'
 
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+= link_to 'Back', training_path(params[:training_id])

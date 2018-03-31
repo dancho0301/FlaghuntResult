@@ -1,0 +1,21 @@
+%h1 練習会
+
+%table.table
+  %thead
+    %tr
+      %th
+      %th
+
+  %tbody
+    - @trainings.each do |training|
+      %tr
+        %td
+          = link_to training.name + '(' + training.event_date.to_s + ')', training
+        %td
+          = link_to '変更', edit_training_path(training), class: 'btn btn-primary'
+          = link_to 'チーム一覧', training, class: 'btn btn-primary'
+          = link_to '結果登録', training_games_path(training), class: 'btn btn-primary'
+          = link_to '削除', training, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+%br
+
+= link_to '新規登録', new_training_path, class: 'btn btn-primary'

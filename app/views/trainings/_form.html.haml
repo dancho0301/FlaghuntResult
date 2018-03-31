@@ -1,0 +1,24 @@
+= form_for @training do |f|
+  - if @training.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@training.errors.count, "error")} prohibited this training from being saved:"
+      %ul
+        - @training.errors.full_messages.each do |message|
+          %li= message
+
+  %table.table
+    %tr
+      %td
+        = f.label '名前'
+      %td
+        = f.text_field :name
+    %tr
+      %td
+        = f.label '開催日'
+      %td
+        = f.date_select :event_date, use_month_numbers: true
+
+
+
+  .actions
+    = f.submit '保存', class: 'btn btn-primary'

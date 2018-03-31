@@ -33,9 +33,76 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-
+    import
     ## With an audit adapter, you can add:
     # history_index
     # history_show
   end
+
+  config.model 'Training' do
+    label '練習会'
+    include_fields_if do
+      not name.match /_at$/
+    end
+
+  end
+
+  config.model 'Member' do
+    label 'プレイヤー'
+    include_fields_if do
+      not name.match /_at$/
+    end
+  end
+
+  config.model 'Team' do
+    label 'チーム'
+    include_fields_if do
+      not name.match /_at$/
+    end
+    field :training do
+      associated_collection_cache_all false # 事前にモデルを読み込まなくなる
+      associated_collection_scope do
+        team = bindings[:object]
+        Proc.new { |scope|
+          # scoping all ParentModel
+          scope = scope.limit(100) # 上限を増やす
+        }
+      end
+    end
+  end
+
+  config.model 'TeamMember' do
+    label 'チームメンバー'
+    include_fields_if do
+      not name.match /_at$/
+    end
+
+  end
+
+  config.model 'Game' do
+    label 'ゲーム'
+    include_fields_if do
+      not name.match /_at$/
+    end
+  end
+
 end
+
+# module RailsAdmin
+#   module Config
+#     module Fields
+#       module Types
+#         class Datetime < RailsAdmin::Config::Fields::Base
+#           register_instance_option :date_format do
+#             :default
+#           end
+#         end
+#         class Date < RailsAdmin::Config::Fields::Types::Datetime
+#           register_instance_option :date_format do
+#             :default
+#           end
+#         end
+#       end
+#     end
+#   end
+# end

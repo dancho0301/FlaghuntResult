@@ -1,0 +1,42 @@
+= form_for [@training, @team] do |f|
+  - if @team.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@team.errors.count, "error")} prohibited this team from being saved:"
+      %ul
+        - @team.errors.full_messages.each do |message|
+          %li= message
+
+  %table.table
+    %tr
+      %td
+        = f.label '練習会'
+      %td
+        - if @training
+          = @training.name
+          = f.hidden_field :training_id
+        - else
+          = @team.training
+          = f.hidden_field :training_id
+    %tr
+      %td
+        = f.label 'チーム名'
+      %td
+        = f.text_field :name, class: 'form-control'
+
+  %h2 チームメンバー
+  %table.table
+    %tr
+      %td
+        名前
+      %td
+        ニックネーム
+    = f.fields_for :members do |member_form|
+      %tr
+        %td
+          = member_form.text_field :name, class: 'form-control'
+        %td
+          = member_form.text_field :nickname, readonly: true, class: 'form-control'
+
+
+  .actions
+    = f.submit '登録'

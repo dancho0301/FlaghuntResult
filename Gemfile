@@ -38,6 +38,8 @@ gem 'rails_admin'
 
 gem 'seed_dump'
 gem 'haml-rails'
+gem 'bootstrap-sass'
+gem "rails_admin_import", "~> 2.1"
 
 
 group :development, :test do
