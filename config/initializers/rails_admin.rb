@@ -52,6 +52,7 @@ RailsAdmin.config do |config|
     include_fields_if do
       not name.match /_at$/
     end
+    exclude_fields :team_members
   end
 
   config.model 'Team' do

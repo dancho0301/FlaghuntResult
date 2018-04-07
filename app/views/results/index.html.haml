@@ -1,0 +1,20 @@
+%h1 2018年 個人戦績表
+
+%table.table
+  %thead
+    %tr
+      %th 氏名
+      %th ニックネーム
+      %th 性別
+      %th フラッグハント数
+
+  %tbody
+    - @results.each do |result|
+      %tr
+        %td= result.name
+        %td= result.nickname
+        %td= result.sex
+        %td
+          -# = result.flaghunt
+          - result.flaghunt.times do
+            = '★'
